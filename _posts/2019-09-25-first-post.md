@@ -1,8 +1,13 @@
 ---
-title: "Welcome to Jekyll!"
+title: "영엑 저장소 개장!"
 date: 2017-10-20 08:26:28 -0400
 categories: jekyll update
 ---
+만드느라 진짜 힘들었습니다. 이걸 이제 어떻게 써먹어야하나 구상중인데 참 힘듭니다.
+이게 내 위대한 첫발짝이 되기를 빕니다
+2019.09.25. 오후 4시 13분, 대학영어 수업 가기 직전
+
+
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
 To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.

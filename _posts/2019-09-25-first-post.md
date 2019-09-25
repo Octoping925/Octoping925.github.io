@@ -1,7 +1,7 @@
 ---
 title: "영엑 저장소 개장!"
 date: 2019-09-25 16:13:28 -0400
-categories: jekyll update
+categories: Start Tired
 ---
 만드느라 진짜 힘들었습니다. 이걸 이제 어떻게 써먹어야하나 구상중인데 참 힘듭니다.
 이게 내 위대한 첫발짝이 되기를 빕니다

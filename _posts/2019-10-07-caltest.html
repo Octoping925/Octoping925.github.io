@@ -1,0 +1,34 @@
+---
+title: "영엑 코어 계산기"
+date: 2019-09-30 19:44:28 -0400
+categories: Calculator Maple
+---
+
+    <h1>영엑 코어 계산기 </h1>
+    <p><strong><u>원하는 레벨까지 강화하는데에 필요한 코어젬스톤 갯수는? </u></strong></p>
+
+    <p><a href="expjem5.html"> → 경험의 코어젬스톤을 5개 먹였을 때 레벨은?</a></p>
+    <p><a href="index.html"> → 원하는 레벨까지 강화하는데에 필요한 코어젬스톤 갯수는?</a></p><br>
+
+    <p> <input type="radio" name="core" value="skillcore"> 스킬코어 <input type="radio" name="core" value="reinforcecore"> 강화코어 </p>
+
+    <p id = "level"> 강화하고 싶은 코어 레벨 <input type="number" name="quantity" min="1" max="25"></p>
+    <p id = "curexp"> 강화하고 싶은 코어 경험치 % <input type="number" name="quantity" min="1" max="99"></p>
+    <p id = "goal">강화하고 싶은 코어의 목표 레벨 <input type="number" name="quantity" min="1" max="25"></p>
+
+    <script>
+    var amv = [0, 55,115,180,250,325,405,490,580,675,775,880,990,1105,1225,1350,1480,1615,1755,1900,2050,2205,2365,2530,2700];
+    var ams = [0, 55,125,210,310,425,555,700,860,1035,1225,1430,1650,1885,2135,2400,2680,2975,3285,3610,3950,4305,4675,5060,5460];
+    // var exp = exp = amv[goal] - amv[level] - (amv[level+1] - amv[level]) * curexp / 100;
+    document.write(141);
+    document.write(151);
+    </script>
+    <p id = "please"> 제발 </p>
+    <input type="button" onclick="document.getElementById(&quot;resexp&quot;).innerHTML = amv[24]-amv[12] " value="계산">
+    <br><br>
+    <p>필요한 경험치는 <span id="resexp"> X </span> </p>
+    <p>필요한 1렙 코어의 갯수는 <span id="onelevel"> X </span></p>
+    <p>평균적으로 필요한 코어 젬스톤의 갯수는 <span id="avrcore"> X </span></p>
+    <p>최대 필요한 코어 젬스톤의 갯수는 <span id="maxcore"> X </span></p> <br>
+
+    <p><a href="https://www.naver.com"> 멋진 사람은 여기로 </a></p>

@@ -19,7 +19,23 @@ categories: Maple
 
     function output()
     {
-      var exp = amv[document.getElementById("goal").value] - amv[document.getElementById("level").value];
+       var corechoose = document.getElementsByName("core");
+      var lev = document.getElementById("level").value;
+      var goal = document.getElementById("goal").value;
+      var crexp = document.getElementById("curexp").value;
+
+      if(corechoose[0].checked == true)
+      {
+        alert('5차 스킬 코어를 선택하셨습니다');
+        var exp = amv[goal] - amv[lev];
+      }
+      else if(corechoose[1].checked == true){
+        alert('스킬 강화 코어를 선택하셨습니다');
+        var exp = ams[goal] - ams[lev];
+      }
+      else {
+        alert('코어 종류를 선택해주세요');
+      }
 
       document.getElementById("resexp").innerHTML = exp;
       document.getElementById("onelevel").innerHTML = exp / 50;

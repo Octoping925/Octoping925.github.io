@@ -8,7 +8,7 @@ categories: Maple
     <h4> → <a>경험의 코어젬스톤을 먹일 때 레벨은?</a></h4>
     <h5> → <a href="https://octoping925.github.io/maple/corecalc/">원하는 레벨까지 강화하는데에 필요한 코어젬스톤 갯수는?</a></h5><br><br>
 
-    <input type = "radio" name = "core" value = "skillcore"> 스킬코어     <input type = "radio" name = "core" value = "reinforcecore"> 강화코어 <br>
+    <input type = "radio" name = "core" value = "skillcore"> 스킬코어     <input type = "radio" name = "core" value = "reinforcecore"> 강화코어 <br><br>
 
     <p> 강화하고 싶은 코어 레벨 <input id = "level" type = "number" min = "1" max = "25"></p>
     <p> 강화하고 싶은 코어 경험치 % <input id = "curexp" type = "number" min = "0" max = "99"></p>
@@ -29,7 +29,6 @@ categories: Maple
 
       if(corechoose[0].checked == true)
       {
-        alert('1');
         var afterlevel;
         var exp = amv[lev] + ((amv[parseInt(lev) + 1] - amv[lev]) * crexp / 100);
         exp = exp + expcore * 150;
@@ -47,7 +46,6 @@ categories: Maple
         document.getElementById("corelevel").innerHTML = afterlevel;
       }
       else if(corechoose[1].checked == true){
-        alert('2');
         var exp = ams[lev] + ((ams[parseInt(lev) + 1] - ams[lev]) * crexp / 100);
         exp = exp + expcore * 150;
 
@@ -73,7 +71,7 @@ categories: Maple
 
     <input type="button" onclick="output()" value="계산">
     <br><br>
-    <p>경험의 코어젬스톤을 <span id="amount"> X</span>개 먹인 후의 코어의 레벨은 <span id ="corelevel"> X </span>이고 <span id = "afterper"> X </span>%</p>
+    <p>경험의 코어젬스톤을 <span id="amount"> X</span>개 먹인 후의 코어의 레벨: <span id ="corelevel"> X </span>    경험치: <span id = "afterper"> X </span>%</p>
 
 
     <p><a href="https://www.naver.com"> 멋진 사람은 여기로 </a></p>

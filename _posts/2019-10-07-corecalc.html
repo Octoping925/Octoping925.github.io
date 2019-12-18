@@ -26,20 +26,27 @@ categories: Maple
       {
         var exp = amv[goal] - amv[lev];
         exp = exp - ((amv[parseInt(lev) + 1] - amv[lev]) * crexp / 100);
+          
+        document.getElementById("resexp").innerHTML = exp.toFixed(2);
+        document.getElementById("onelevel").innerHTML = (exp / 50).toFixed(2);
+        document.getElementById("avrcore").innerHTML = (exp * 0.1302).toFixed(2);
+        document.getElementById("maxcore").innerHTML = (exp * 14 / 50).toFixed(2);
+        document.getElementById("expcore").innerHTML = (exp / 150).toFixed(2);
       }
       else if(corechoose[1].checked == true){
         var exp = ams[goal] - ams[lev];
         exp = exp - ((ams[parseInt(lev) + 1] - ams[lev]) * crexp / 100);
+        document.getElementById("resexp").innerHTML = exp.toFixed(2);
+        document.getElementById("onelevel").innerHTML = (exp / 50).toFixed(2);
+        document.getElementById("avrcore").innerHTML = (exp * 2 / 45).toFixed(2);
+        document.getElementById("maxcore").innerHTML = (exp * 14 / 50).toFixed(2);
+        document.getElementById("expcore").innerHTML = (exp / 150).toFixed(2);
       }
       else {
         alert('코어 종류를 선택해주세요');
       }
 
-      document.getElementById("resexp").innerHTML = exp.toFixed(2);
-      document.getElementById("onelevel").innerHTML = (exp / 50).toFixed(2);
-      document.getElementById("avrcore").innerHTML = (exp * 0.1302).toFixed(2);
-      document.getElementById("maxcore").innerHTML = (exp * 14 / 50).toFixed(2);
-      document.getElementById("expcore").innerHTML = (exp / 150).toFixed(2);
+
     }
     </script>
 

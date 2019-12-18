@@ -3,11 +3,10 @@ title: "영엑 경코젬 코어 계산기"
   date: 2019-12-18 14:53:28 -0400
 categories: Maple
 ---
- 
-    <h4> 경험의 코어젬스톤을 5개 먹였을 때 레벨은? </h4>
+    <p><strong><u>경험의 코어젬스톤을 5개 먹였을 때 레벨은? </u></strong></p>
 
     <h5> → <a>경험의 코어젬스톤을 먹일 때 레벨은?</a></h5>
-    <p> → <a href="https://octoping925.github.io/maple/corecalc/">원하는 레벨까지 강화하는데에 필요한 코어젬스톤 갯수는?</a></p><br>
+    <h4> → <a href="https://octoping925.github.io/maple/corecalc/">원하는 레벨까지 강화하는데에 필요한 코어젬스톤 갯수는?</a></h4><br><br>
 
     <input type = "radio" name = "core" value = "skillcore"> 스킬코어     <input type = "radio" name = "core" value = "reinforcecore"> 강화코어 <br>
 

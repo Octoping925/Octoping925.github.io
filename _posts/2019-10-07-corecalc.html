@@ -15,11 +15,9 @@ categories: Maple
     var amv = [0, 0, 55,115,180,250,325,405,490,580,675,775,880,990,1105,1225,1350,1480,1615,1755,1900,2050,2205,2365,2530,2700];
     var ams = [0, 0, 55,125,210,310,425,555,700,860,1035,1225,1430,1650,1885,2135,2400,2680,2975,3285,3610,3950,4305,4675,5060,5460];
 
-    // var exp = amv[goal] - amv[level] - (amv[level+1] - amv[level]) * curexp / 100;
-
     function output()
     {
-       var corechoose = document.getElementsByName("core");
+      var corechoose = document.getElementsByName("core");
       var lev = document.getElementById("level").value;
       var goal = document.getElementById("goal").value;
       var crexp = document.getElementById("curexp").value;
@@ -27,31 +25,35 @@ categories: Maple
       if(corechoose[0].checked == true)
       {
         var exp = amv[goal] - amv[lev];
+        exp = exp - ((amv[parseInt(lev) + 1] - amv[lev]) * crexp / 100);
       }
-      else if(corechoose[1].checked == true)
-      {
+      else if(corechoose[1].checked == true){
         var exp = ams[goal] - ams[lev];
+        exp = exp - ((ams[parseInt(lev) + 1] - ams[lev]) * crexp / 100);
       }
       else {
         alert('코어 종류를 선택해주세요');
       }
 
-      document.getElementById("resexp").innerHTML = exp;
-      document.getElementById("onelevel").innerHTML = exp / 50;
+      document.getElementById("resexp").innerHTML = exp.toFixed(2);
+      document.getElementById("onelevel").innerHTML = (exp / 50).toFixed(2);
       document.getElementById("avrcore").innerHTML = (exp * 0.1302).toFixed(2);
-      document.getElementById("maxcore").innerHTML = exp * 14 / 50;
+      document.getElementById("maxcore").innerHTML = (exp * 14 / 50).toFixed(2);
       document.getElementById("expcore").innerHTML = (exp / 150).toFixed(2);
     }
-
-
     </script>
 
     <input type="button" onclick="output()" value="계산">
-    <br><br>
-    <p>필요한 경험치는 <span id="resexp"> X </span> </p>
-    <p>필요한 1렙 코어의 갯수는 <span id="onelevel"> X </span></p>
-    <p>평균적으로 필요한 코어 젬스톤의 갯수는 <span id="avrcore"> X </span></p>
-    <p>최대 필요한 코어 젬스톤의 갯수는 <span id="maxcore"> X </span></p>
-    <p>필요한 경험의 코어 젬스톤의 갯수는 <span id="expcore"> X </span></p> <br>
 
-    <p><a href="https://www.naver.com"> 멋진 사람은 여기로 </a></p>
+    <br><br>
+    <p>필요한 경험치는 <span id = "resexp"> X </span> </p>
+    <p>필요한 1렙 코어의 갯수는 <span id = "onelevel"> X </span>개</p>
+    <p>평균적으로 필요한 코어 젬스톤의 갯수는 <span id = "avrcore"> X </span>개</p>
+    <p>최대 필요한 코어 젬스톤의 갯수는 <span id = "maxcore"> X </span>개</p> <br>
+    <p>필요한 경코젬의 갯수는 <span id = "expcore"> X </span>개</p><br>
+
+
+    <p><a href = "https://www.naver.com"> 멋진 사람은 여기로 </a></p>
+
+  </body>
+</html>

@@ -1,0 +1,89 @@
+---
+title: "타일런트 강화 시뮬레이터"
+date: 2020-02-06 13:52:01 -0400
+categories: Maple
+---
+<p><strong><u>타일런트 강화하기 </u></strong></p>
+
+
+<p> 강화 시작 레벨 <input id = "start_level" type="number" min="0" max="15"></p>
+<p> 강화 목표 레벨 <input id = "goal_level" type="number" min="0" max="15"></p>
+<p> 스타캐치 수행 여부 <input id = "star_catch" type="checkbox"></p>
+<p> 수행 횟수 <input id = "rein_try" type="number"></p>
+
+<script>
+var opportunity = [[50, 0], [50, 0], [45, 0], [40, 0], [40, 0], [40, 1.8], [40, 3], [40, 4.2], [40, 6], [37, 9.5], [35, 13], [35, 16.3], [3, 48.5], [2, 49], [1, 49]];
+
+function output()
+{
+  var st = Number(document.getElementById("start_level").value);
+  var goal = Number(document.getElementById("goal_level").value);
+  var st_catch = document.getElementById("star_catch");
+  var tryy = Number(document.getElementById("rein_try").value);
+  var cnt = 0;
+  var destroyed = 0;
+  var cur_star;
+  var cur_meso = 0;
+  var bo = 0;
+
+  if(st_catch.checked)
+  {
+    bo = 4.5;
+  }
+
+  document.getElementById("avgmeso").innerHTML = "로딩 중";
+  document.getElementById("avgbroke").innerHTML = "로딩 중";
+
+  while(cnt < tryy)
+  {
+    cur_star = st;
+
+    while (cur_star < goal)
+    {
+      cur_meso += 5583.22;
+      opp = Math.random() * 100;
+
+      if(opp < opportunity[cur_star][0] + bo || chance == 2)
+      {
+        cur_star += 1;
+        chance = 0;
+      }
+      else if(opp > 100 - opportunity[cur_star][1])
+      {
+        cur_star = 0;
+        destroyed += 1;
+        cur_meso += 17000;
+        chance = 0;
+      }
+      else
+      {
+        if(cur_star > 1)
+        {
+          cur_star -= 1;
+          chance += 1;
+        }
+      }
+      // alert(cur_star);
+    }
+    // alert(cur_meso);
+    cnt += 1;
+  }
+  alert("END");
+  document.getElementById("avgmeso").innerHTML = parseInt(cur_meso / tryy * 10000);
+  document.getElementById("avgbroke").innerHTML = (destroyed / tryy).toFixed(2);
+  document.getElementById("eok").innerHTML = parseInt(cur_meso / tryy / 10000);
+  document.getElementById("man").innerHTML = parseInt(cur_meso / tryy) % 10000;
+  document.getElementById("ddg").innerHTML = parseInt(cur_meso / tryy * 10000 % 10000);
+}
+</script>
+
+<input type="button" onclick="output()" value="계산">
+
+<br><br>
+<p>평균 필요 메소: <span id = "avgmeso"> X </span> (<span id = "eok">?</span>억 <span id = "man">?</span>만 <span id = "ddg">?</span> 메소)</p>
+<p>평균 장비 파괴 횟수: <span id = "avgbroke"> X </span></p>
+
+<p><a href = "https://www.google.com"> 멋진 사람은 여기로 </a></p>
+
+</body>
+</html>

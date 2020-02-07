@@ -11,8 +11,9 @@ categories: Maple
 <p> 강화 시작 레벨 <input id = "start_level" type="number" min="0" max="15"></p>
 <p> 강화 목표 레벨 <input id = "goal_level" type="number" min="0" max="15"></p>
 <p> 스타캐치 수행 여부 <input id = "star_catch" type="checkbox"></p>
-<p> 파괴방지 시행 레벨 범위 <input id = "des_start" type="number">  ~ <input id = "des_end" type="number"></p>
+<p> 파괴방지 시행 레벨 범위 <input id = "des_start" type="number"> ~ <input id = "des_end" type="number"></p>
 <p> 수행 횟수 <input id = "rein_try" type="number"></p>
+<p> 노작 값 (1000만이면 1000, 1억이면 10000으로 적어주세요) <input id = "nojac" type="number"></p>
 
 <script>
 var opportunity = [[95, 0], [90, 0], [85, 0], [85, 0], [80, 0], [75, 0], [70, 0], [65, 0], [60, 0], [55, 0], [50, 0], [45, 0], [40, 0.6], [35, 1.3], [30, 1.4], [30, 2.1], [30, 2.1], [30, 2.1], [30, 2.8], [30, 2.8], [30, 7], [30, 7], [3, 19.4], [2, 29.4], [1, 39.6]];
@@ -26,6 +27,7 @@ function output()
   var des_st = document.getElementById("des_start").value;
   var des_end = document.getElementById("des_end").value;
   var tryy = Number(document.getElementById("rein_try").value);
+  var nojak = Number(document.getElementById("nojac").value);
   var des_bl;
   var cnt = 0;
   var destroyed = 0;
@@ -59,7 +61,7 @@ function output()
       {
         cur_star = 0;
         destroyed += 1;
-        cur_meso += 48000;
+        cur_meso += nojak;
         chance = 0;
       }
       else
@@ -88,7 +90,7 @@ function output()
 <p>평균 필요 메소: <span id = "avgmeso"> X </span> (<span id = "eok">?</span>억 <span id = "man">?</span>만 <span id = "ddg">?</span> 메소)</p>
 <p>평균 장비 파괴 횟수: <span id = "avgbroke"> X </span></p>
 
-<p><a href = "https://www.google.com/search?q=%EC%83%A4%ED%8B%80%EB%A0%88%EB%8A%90&oq=%EC%83%A4%ED%8B%80%EB%A0%88%EB%8A%90&aqs=chrome..69i57j0.1663j0j9&sourceid=chrome&ie=UTF-8"> 멋진 사람은 여기로 </a></p>
+<p><a href = "https://www.google.com"> 멋진 사람은 여기로 </a></p>
 
 </body>
 </html>

@@ -1,12 +1,18 @@
 ---
-title: "아케인셰이드 강화 시뮬레이터"
+title: "스타포스 강화 시뮬레이터"
 date: 2020-02-07 15:14:01 -0400
 categories: Maple
 ---
 <html>
 <body>
-<p><strong><u>아케인 강화하기 </u></strong></p>
+<p><strong><u>스타포스 강화하기 </u></strong></p>
 
+<p> 강화 템 렙제
+  <input type="radio" name="item_level" value="lev_140">140제
+  <input type="radio" name="item_level" value="lev_150">150제
+  <input type="radio" name="item_level" value="lev_160">160제
+  <input type="radio" name="item_level" value="lev_200">200제
+</p>
 
 <p> 강화 시작 레벨 <input id = "start_level" type="number" min="0" max="15"></p>
 <p> 강화 목표 레벨 <input id = "goal_level" type="number" min="0" max="15"></p>
@@ -17,15 +23,16 @@ categories: Maple
 
 <script>
 var opportunity = [[95, 0], [90, 0], [85, 0], [85, 0], [80, 0], [75, 0], [70, 0], [65, 0], [60, 0], [55, 0], [50, 0], [45, 0], [40, 0.6], [35, 1.3], [30, 1.4], [30, 2.1], [30, 2.1], [30, 2.1], [30, 2.8], [30, 2.8], [30, 7], [30, 7], [3, 19.4], [2, 29.4], [1, 39.6]];
-var price = [32.1, 64.1, 128.1, 160.1, 192.1, 224.1, 256.1, 288.1, 320.1, 1296.65, 1640.01, 2035.63, 2486.53, 2995.65, 7131.65, 8399.96, 9801.67, 11342.23, 13027, 14861.24, 16850.15, 18998.86, 21312.4, 23795.77];
+var price;
 
 function output()
 {
+  var lev_choose = document.getElementsByName("item_level");
   var st = Number(document.getElementById("start_level").value);
   var goal = Number(document.getElementById("goal_level").value);
   var st_catch = document.getElementById("star_catch");
-  var des_st = document.getElementById("des_start").value;
-  var des_end = document.getElementById("des_end").value;
+  var des_st = Number(document.getElementById("des_start").value);
+  var des_end = Number(document.getElementById("des_end").value);
   var tryy = Number(document.getElementById("rein_try").value);
   var nojak = Number(document.getElementById("nojac").value);
   var des_bl;
@@ -40,14 +47,19 @@ function output()
   document.getElementById("avgmeso").innerHTML = "로딩 중";
   document.getElementById("avgbroke").innerHTML = "로딩 중";
 
+  if (lev_choose[0].checked == true) price = [11, 22, 33, 44, 54.9, 65.9, 76.9, 87.9, 98.8, 109.8, 444.8, 562.5, 698.2, 852.9, 1027.5, 2446.2, 2881.2, 3362, 3890.4, 4468.3, 5097.4, 5779.6, 6516.6, 7310.2, 8162];
+  else if (lev_choose[1].checked == true) price = [13.6, 27.1, 40.6, 54.1, 67.6, 81.1, 94.6, 108.1, 121.6, 135.1, 547, 691.9, 858.8, 1049, 1263.8, 3008.7, 3543.7, 4135.1, 4785, 5495.8, 6269.6, 7108.7, 8015.2, 8991.2, 10038.9];
+  else if (lev_choose[2].checked == true) price = [16.4, 32.8, 49.2, 65.6, 82, 98.4, 114.7, 131.1, 147.5, 163.9, 663.9, 839.7, 1042.2, 1273.1, 1533.8, 3651.4, 4300.8, 5018.5, 5807.2, 6669.8, 7609, 8627.3, 9727.4, 10912, 12183.4];
+  else if (lev_choose[3].checked == true) price = [32.1, 64.1, 128.1, 160.1, 192.1, 224.1, 256.1, 288.1, 320.1, 1296.65, 1640.01, 2035.63, 2486.53, 2995.65, 7131.65, 8399.96, 9801.67, 11342.23, 13027, 14861.24, 16850.15, 18998.86, 21312.4, 23795.77];
+
   while(cnt < tryy)
   {
     cur_star = st;
 
     while (cur_star < goal)
     {
-      des_bl = 1
       if (des_st <= cur_star && cur_star < des_end) des_bl = 2;
+      else des_bl = 1;
       cur_meso += price[cur_star] * des_bl;
 
       opp = Math.random() * 100;
@@ -94,3 +106,7 @@ function output()
 
 </body>
 </html>
+
+
+2020년 04월 21일 6시 10분
+140, 150, 160제 스타포스 추가

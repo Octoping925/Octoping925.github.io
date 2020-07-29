@@ -21,7 +21,7 @@ locale                   : "ko-KR"
 title                    : "영엑 저장소"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "0xfc"
+name                     : ""
 description              : "영엑 짱"
 url                      : "https://Octoping925.github.io" # the base hostname & protocol for your site e.g. "https://Octoping925.github.io"
 baseurl                  : "" # the subpath of your site, e.g. ""

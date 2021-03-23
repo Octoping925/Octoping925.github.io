@@ -1,0 +1,65 @@
+<h1><strong> 방무 계산기 </strong></h1>
+
+<p> 본인 스탯창 방무 <input id = "statbm" type="number" min="1" max="100"></p>
+<p> 보스몹 방어력 <input id = "boss" type="number" min="1" max="1000"></p>
+<br>
+
+<p> 코강방무 20% <input id = "corebm20" type="checkbox"></p>
+<p> 빅뱅방깎 50% <input id = "bigbang20" type="checkbox"></p>
+<p> 메르방깎 30% <input id = "mercedes30" type="checkbox"></p>
+<p> 나워방깎 35% <input id = "nightwalker35" type="checkbox"></p>
+<br>
+
+
+<p> 추가 방무1 <input id = "additionalbm1" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무2 <input id = "additionalbm2" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무3 <input id = "additionalbm3" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무4 <input id = "additionalbm4" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무5 <input id = "additionalbm5" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무6 <input id = "additionalbm6" type="number" value="0" min="1" max="100"></p>
+<p> 추가 방무7 <input id = "additionalbm7" type="number" value="0" min="1" max="100"></p>
+<br>
+<input type="button" onclick="output()" value="계산">
+<br><br>
+
+<p> 실방무: <span id="realBm">X</span>% <p>
+<p> 보스몬스터 (방어력: <span id="bossB">X</span>%)에게 들어가는 최종데미지: <span id="finaldmg">X</span>% </p>
+
+
+<script>
+
+function output()
+{
+  var bm = document.getElementById("statbm").value;
+  var bossB = document.getElementById("boss").value;
+
+  var corebm = document.getElementById("corebm20");
+  var bigbangbm = document.getElementById("bigbang20");
+  var mercedesbm = document.getElementById("mercedes30");
+  var nightwalkerbm = document.getElementById("nightwalker35");
+
+
+  if(corebm.checked) bm = addBM(bm, 20);
+  if(bigbangbm.checked) bm = addBM(bm, 50);
+  if(mercedesbm.checked) bm = addBM(bm, 30);
+  if(nightwalkerbm.checked) bm = addBM(bm, 35);
+
+  bm = addBM(bm, document.getElementById("additionalbm1").value);
+  bm = addBM(bm, document.getElementById("additionalbm2").value);
+  bm = addBM(bm, document.getElementById("additionalbm3").value);
+  bm = addBM(bm, document.getElementById("additionalbm4").value);
+  bm = addBM(bm, document.getElementById("additionalbm5").value);
+  bm = addBM(bm, document.getElementById("additionalbm6").value);
+  bm = addBM(bm, document.getElementById("additionalbm7").value);
+
+
+  document.getElementById("realBm").innerHTML = bm.toFixed(2);
+  document.getElementById("bossB").innerHTML = bossB;
+  document.getElementById("finaldmg").innerHTML = (100 - (100 - bm) * bossB / 100).toFixed(2);
+}
+
+function addBM(bm, add) {
+  return 100 - ((100 - bm) * (100 - add) / 100);
+}
+
+</script>

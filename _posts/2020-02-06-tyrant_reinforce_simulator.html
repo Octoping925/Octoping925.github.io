@@ -3,87 +3,122 @@ title: "타일런트 강화 시뮬레이터"
 date: 2020-02-06 13:52:01 -0400
 categories: Maple
 ---
-<p><strong><u>타일런트 강화하기 </u></strong></p>
-
-
+---
+title: "타일런트 강화 시뮬레이터"
+date: 2020-02-06 13:52:01 -0400
+categories: Maple
+---
 <p> 강화 시작 레벨 <input id = "start_level" type="number" min="0" max="15"></p>
 <p> 강화 목표 레벨 <input id = "goal_level" type="number" min="0" max="15"></p>
-<p> 스타캐치 수행 여부 <input id = "star_catch" type="checkbox"></p>
-<p> 수행 횟수 <input id = "rein_try" type="number"></p>
+<p> 스타캐치 수행 여부 <input id = "useStarCatch" type="checkbox"></p>
+<p> 노작 값 (1000만이면 1000, 1억이면 10000으로 적어주세요) <input id = "nojak" type="number"></p>
 
 <script>
-var opportunity = [[50, 0], [50, 0], [45, 0], [40, 0], [40, 0], [40, 1.8], [40, 3], [40, 4.2], [40, 6], [37, 9.5], [35, 13], [35, 16.3], [3, 48.5], [2, 49], [1, 49]];
+  const opportunity = [[50, 0], [50, 0], [45, 0], [40, 0], [40, 0], [40, 1.8], [40, 3], [40, 4.2],
+    [40, 6], [37, 9.5], [35, 13], [35, 16.3], [3, 48.5], [2, 49], [1, 49]];
 
-function output()
-{
-  var st = Number(document.getElementById("start_level").value);
-  var goal = Number(document.getElementById("goal_level").value);
-  var st_catch = document.getElementById("star_catch");
-  var tryy = Number(document.getElementById("rein_try").value);
-  var cnt = 0;
-  var destroyed = 0;
-  var cur_star;
-  var cur_meso = 0;
-  var bo = 0;
+  let price;
 
-  if(st_catch.checked)
+  const CONSTANTS = {
+    SUCCESS: 0,
+    FAIL: 1,
+    DESTROY: 2,
+    REINFORCE_PRICE: 5583.22,
+  };
+
+  function output()
   {
-    bo = 4.5;
-  }
+    const startLevel = Number(document.getElementById("start_level").value);
+    const goalLevel = Number(document.getElementById("goal_level").value);
+    const starcatchBonus = document.getElementById("useStarCatch").checked ? 4.5 : 0;
+    const nojakPrice = Number(document.getElementById("nojak").value);
 
-  document.getElementById("avgmeso").innerHTML = "로딩 중";
-  document.getElementById("avgbroke").innerHTML = "로딩 중";
+    class Item {
+      star;
+      meso;
+      failCnt;
+      destroyCnt;
 
-  while(cnt < tryy)
-  {
-    cur_star = st;
-
-    while (cur_star < goal)
-    {
-      cur_meso += 5583.22;
-      opp = Math.random() * 100;
-
-      if(opp < opportunity[cur_star][0] + bo || chance == 2)
-      {
-        cur_star += 1;
-        chance = 0;
+      constructor() {
+        this.star = startLevel;
+        this.meso = 0;
+        this.failCnt = 0;
+        this.destroyCnt = 0;
       }
-      else if(opp > 100 - opportunity[cur_star][1])
-      {
-        cur_star = 0;
-        destroyed += 1;
-        cur_meso += 17000;
-        chance = 0;
-      }
-      else
-      {
-        if(cur_star > 1)
-        {
-          cur_star -= 1;
-          chance += 1;
+
+      doReinforce() {
+        this.meso += CONSTANTS.REINFORCE_PRICE;
+        const result = this.getReinforceResult();
+
+        switch(result) {
+          case CONSTANTS.SUCCESS:
+            this.star++;
+            this.failCnt = 0;
+            break;
+
+          case CONSTANTS.DESTROY:
+            this.star = 0;
+            this.meso += nojakPrice;
+            this.destroyCnt++;
+            this.failCnt = 0;
+            break;
+
+          case CONSTANTS.FAIL:
+            if(this.star > 0) {
+              this.star--;
+              this.failCnt++;
+            }
+            break;
         }
       }
-      // alert(cur_star);
+
+      getReinforceResult() {
+        const opp = Math.random() * 100;
+        const successOpp = opportunity[this.star][0] + starcatchBonus;
+        const destroyOpp = opportunity[this.star][1];
+
+        if (opp < successOpp || this.failCnt === 2) {
+          return CONSTANTS.SUCCESS;
+        }
+        else if (opp > 100 - destroyOpp) {
+          return CONSTANTS.DESTROY;
+        }
+        else {
+          return CONSTANTS.FAIL;
+        }
+      }
     }
-    // alert(cur_meso);
-    cnt += 1;
+
+    let totalMeso = 0;
+    let totalDestroyedCnt = 0
+    const tryCnt = 1000;
+
+    for(let i = 0; i < tryCnt; ++i) {
+      const cur = new Item();
+
+      while (cur.star < goalLevel) {
+        cur.doReinforce();
+      }
+
+      totalMeso += cur.meso;
+      totalDestroyedCnt += cur.destroyCnt;
+    }
+
+    document.getElementById("averageMeso").innerHTML = parseInt(totalMeso / tryCnt * 10000);
+    document.getElementById("averageBrokeCnt").innerHTML = (totalDestroyedCnt / tryCnt).toFixed(2);
+    const avgMesoStr = `${parseInt(totalMeso / tryCnt / 10000)}억 ${parseInt(totalMeso / tryCnt) % 10000}만 ${parseInt(totalMeso / tryCnt * 10000 % 10000)} 메소`;
+    document.getElementById("averageMeso").innerHTML = avgMesoStr;
   }
-  alert("END");
-  document.getElementById("avgmeso").innerHTML = parseInt(cur_meso / tryy * 10000);
-  document.getElementById("avgbroke").innerHTML = (destroyed / tryy).toFixed(2);
-  document.getElementById("eok").innerHTML = parseInt(cur_meso / tryy / 10000);
-  document.getElementById("man").innerHTML = parseInt(cur_meso / tryy) % 10000;
-  document.getElementById("ddg").innerHTML = parseInt(cur_meso / tryy * 10000 % 10000);
-}
 </script>
 
 <input type="button" onclick="output()" value="계산">
 
 <br><br>
-<p>평균 필요 메소: <span id = "avgmeso"> X </span> (<span id = "eok">?</span>억 <span id = "man">?</span>만 <span id = "ddg">?</span> 메소)</p>
-<p>평균 장비 파괴 횟수: <span id = "avgbroke"> X </span></p>
+<p>평균 필요 메소: <span id="averageMeso"></span>
+<p>평균 장비 파괴 횟수: <span id = "averageBrokeCnt"> X </span></p>
 
 <p><a href = "https://www.google.com"> 멋진 사람은 여기로 </a></p>
 
-</body>
-</html>
+<br>
+2022년 07월 12일<br>
+코드 리팩토링<br>

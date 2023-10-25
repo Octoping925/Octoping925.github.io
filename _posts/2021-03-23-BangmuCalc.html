@@ -3,66 +3,115 @@ title: "방무 계산기"
 date: 2021-03-23 11:56:00 -0400
 categories: Maple
 ---
-<p> 본인 스탯창 방무 <input id = "statbm" type="number" min="1" max="100"></p>
-<p> 보스몹 방어력 <input id = "boss" type="number" min="1" max="1000"></p>
-<br>
 
-<p> 코강방무 20% <input id = "corebm20" type="checkbox"></p>
-<p> 빅뱅방깎 50% <input id = "bigbang20" type="checkbox"></p>
-<p> 메르방깎 30% <input id = "mercedes30" type="checkbox"></p>
-<p> 나워방깎 35% <input id = "nightwalker35" type="checkbox"></p>
-<br>
+<p>본인 스탯창 방무 <input id="statbm" type="number" min="1" max="100" /></p>
+<p>보스몹 방어력 <input id="boss" type="number" min="1" max="1000" /></p>
+<br />
 
+<div class="defaultBangMu">
+    <p>
+        <label>코강방무 20% <input id="corebm" type="checkbox" data-bm="20" /></label>
+    </p>
+    <p>
+        <label>빅뱅방깎 50% <input id="bigbang" type="checkbox" data-bm="50" /></label>
+    </p>
+    <p>
+        <label>메르방깎 30% <input id="mercedes" type="checkbox" data-bm="30" /></label>
+    </p>
+    <p>
+        <label>나워방깎 35% <input id="nightwalker" type="checkbox" data-bm="35" /></label>
+    </p>
+</div>
 
-<p> 추가 방무1 <input id = "additionalbm1" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무2 <input id = "additionalbm2" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무3 <input id = "additionalbm3" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무4 <input id = "additionalbm4" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무5 <input id = "additionalbm5" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무6 <input id = "additionalbm6" type="number" value="0" min="0" max="100"></p>
-<p> 추가 방무7 <input id = "additionalbm7" type="number" value="0" min="0" max="100"></p>
-<br>
-<input type="button" onclick="output()" value="계산">
-<br><br>
+<br />
 
-<p> 실방무: <span id="realBm">X</span>% <p>
-<p> 보스몬스터 (방어력: <span id="bossB">X</span>%)에게 들어가는 최종데미지: <span id="finaldmg">X</span>% </p>
+<div class="additionalBangMu">
+    <div>
+        추가 방무1
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무2
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무3
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무4
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무5
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무6
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+    <div>
+        추가 방무7
+        <input type="number" value="0" min="0" max="100" />
+    </div>
+</div>
 
+<br />
+<button onclick="output()">계산</button>
+<br /><br />
+
+<p>실방무: <span id="realBm">X</span>%</p>
+<p></p>
+<p>
+    보스몬스터 (방어력: <span id="bossB">X</span>%)에게 들어가는 최종데미지:
+    <span id="finaldmg">X</span>%
+</p>
 
 <script>
- 
-function output()
-{
-  var bm = document.getElementById("statbm").value;
-  var bossB = document.getElementById("boss").value;
+    class BangMu {
+        #value;
 
-  var corebm = document.getElementById("corebm20");
-  var bigbangbm = document.getElementById("bigbang20");
-  var mercedesbm = document.getElementById("mercedes30");
-  var nightwalkerbm = document.getElementById("nightwalker35");
+        /**
+         * @param value {number}
+         */
+        constructor(value) {
+            this.#value = value;
+        }
 
+        addBangMu(addValue) {
+            this.#value = 100 - ((100 - this.#value) * (100 - addValue)) / 100;
+        }
 
-  if(corebm.checked) bm = addBM(bm, 20);
-  if(bigbangbm.checked) bm = addBM(bm, 50);
-  if(mercedesbm.checked) bm = addBM(bm, 30);
-  if(nightwalkerbm.checked) bm = addBM(bm, 35);
+        getValue() {
+            return this.#value;
+        }
 
-  bm = addBM(bm, document.getElementById("additionalbm1").value);
-  bm = addBM(bm, document.getElementById("additionalbm2").value);
-  bm = addBM(bm, document.getElementById("additionalbm3").value);
-  bm = addBM(bm, document.getElementById("additionalbm4").value);
-  bm = addBM(bm, document.getElementById("additionalbm5").value);
-  bm = addBM(bm, document.getElementById("additionalbm6").value);
-  bm = addBM(bm, document.getElementById("additionalbm7").value);
+        getDamagePercent(bossArmor) {
+            return 100 - ((100 - this.#value) * bossArmor) / 100;
+        }
+    }
+    
+    function output() {
+        const bangmu = document.getElementById("statbm").value;
+        const bossArmor = document.getElementById("boss").value;
 
+        const bm = new BangMu(bangmu);
 
-  document.getElementById("realBm").innerHTML = bm.toFixed(2);
-  document.getElementById("bossB").innerHTML = bossB;
-  document.getElementById("finaldmg").innerHTML = (100 - (100 - bm) * bossB / 100).toFixed(2);
-}
+        Array.from(document.querySelectorAll(".defaultBangMu input"))
+            .filter(element => element.checked)
+            .map(bangMuElement => Number(bangMuElement.getAttribute("data-bm")))
+            .forEach(value => bm.addBangMu(value));
 
-function addBM(bm, add) {
-  return 100 - ((100 - bm) * (100 - add) / 100);
-}
+        Array.from(document.querySelectorAll(".additionalBangMu input"))
+            .filter(element => element.value !== "")
+            .map(bangMuElement => Number(bangMuElement.value))
+            .forEach(value => bm.addBangMu(value));
 
+        const finalBangmu = bm.getValue();
+
+        document.getElementById("realBm").innerHTML = finalBangmu.toFixed(2);
+        document.getElementById("bossB").innerHTML = bossArmor;
+        document.getElementById("finaldmg").innerHTML = bm.getDamagePercent(bossArmor).toFixed(2);
+    }
 </script>
+</button>

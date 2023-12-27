@@ -1,13 +1,19 @@
 import { ReactElement, useState } from "react";
-import { Button, Input, Radio } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   EXP_CORE_EXP,
   REINFORCE_CORE_EXP_ARR,
   SKILL_CORE_EXP_ARR,
-} from "@/constant/core-exp";
-import { NextPageWithLayout } from "@/pages/_app";
-import { Layout } from "@/component/Layout";
+} from "../../constant/core-exp";
+import { NextPageWithLayout } from "../_app";
+import { Layout } from "../../component/Layout";
+import {
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Button,
+  Card,
+} from "@mui/material";
 
 type Input = {
   coreType: "skill" | "reinforce";
@@ -24,82 +30,73 @@ type ResultState = {
 const ExpCoreExpCalculator: NextPageWithLayout = () => {
   const [resultState, setResultState] = useState<ResultState>();
 
-  const { handleSubmit, setValue } = useForm<Input>({
+  const { handleSubmit, getValues, setValue } = useForm<Input>({
     defaultValues: { beforeCoreExpPercent: 0 },
   });
   const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data);
-
     const result = output(data);
     setResultState(result);
   };
 
   return (
-    <div>
-      <form>
-        <Radio.Group>
-          <Radio.Button
+    <>
+      <Card
+        style={{
+          margin: "20px",
+          padding: "30px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <ToggleButtonGroup value={getValues("coreType")}>
+          <ToggleButton
             value="skill"
             onChange={() => setValue("coreType", "skill")}
           >
             스킬코어
-          </Radio.Button>
-          <Radio.Button
+          </ToggleButton>
+          <ToggleButton
             value="reinforce"
             onChange={() => setValue("coreType", "reinforce")}
           >
             강화코어
-          </Radio.Button>
-        </Radio.Group>
-
-        <p>
-          {" "}
-          강화하고 싶은 코어 레벨{" "}
-          <Input
-            type="number"
-            min="1"
-            max="25"
-            onChange={(e) =>
-              setValue("beforeCoreLevel", Number(e.target.value))
-            }
-          />
-        </p>
-        <p>
-          {" "}
-          강화하고 싶은 코어 경험치 %{" "}
-          <Input
-            type="number"
-            defaultValue={0}
-            min="0"
-            max="99"
-            onChange={(e) =>
-              setValue("beforeCoreExpPercent", Number(e.target.value))
-            }
-          />
-        </p>
-        <p>
-          {" "}
-          먹일 경험의 코어젬스톤 갯수{" "}
-          <Input
-            type="number"
-            min="0"
-            max="25"
-            onChange={(e) =>
-              setValue("willUseExpCoreAmount", Number(e.target.value))
-            }
-          />
-        </p>
-        <Button onClick={handleSubmit(onSubmit)}>계산</Button>
-      </form>
-      <br />
-      <br />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <br />
+        <TextField
+          type="number"
+          label="강화하고 싶은 코어 레벨"
+          onChange={(e) => setValue("beforeCoreLevel", Number(e.target.value))}
+        />
+        <br />
+        <TextField
+          type="number"
+          label="강화하고 싶은 코어 경험치 %"
+          defaultValue={0}
+          onChange={(e) =>
+            setValue("beforeCoreExpPercent", Number(e.target.value))
+          }
+        />
+        <br />
+        <TextField
+          type="number"
+          label="먹일 경험의 코어젬스톤 갯수"
+          onChange={(e) =>
+            setValue("willUseExpCoreAmount", Number(e.target.value))
+          }
+        />
+        <br />
+        <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+          계산
+        </Button>
+      </Card>
       {resultState && (
-        <div>
+        <Card style={{ margin: "20px", padding: "30px" }}>
           <p>먹인 후의 코어의 레벨: {resultState.afterCoreLevel}</p>
           <p>경험치: {resultState.afterCoreExpPercent.toFixed(2)}%</p>
-        </div>
+        </Card>
       )}
-    </div>
+    </>
   );
 };
 

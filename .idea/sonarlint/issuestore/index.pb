@@ -34,3 +34,15 @@ D
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+>
+next.config.js,8\1\811a6d5a2e04fadb44d8eec365f2fa8af5c4facf
+A
+postcss.config.js,3\f\3f70684581fd16ab3be77ca959e0138ef3ee8bfb
+>
+.eslintrc.json,7\1\71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
+B
+pages/api/hello.ts,1\a\1a90d01be90e8d5774c682e9d222e618e3273e9b
+=
+tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0

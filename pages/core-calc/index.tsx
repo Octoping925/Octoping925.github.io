@@ -1,5 +1,4 @@
 import { ReactElement, useState } from "react";
-import { Button, Input, Radio } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   CORE_EXP,
@@ -8,9 +7,16 @@ import {
   REINFORCE_CORE_PIECE,
   SKILL_CORE_EXP_ARR,
   SKILL_CORE_PIECE_COST,
-} from "@/constant/core-exp";
-import { Layout } from "@/component/Layout";
-import { NextPageWithLayout } from "@/pages/_app";
+} from "../../constant/core-exp";
+import { Layout } from "../../component/Layout";
+import { NextPageWithLayout } from "../_app";
+import {
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Button,
+  Card,
+} from "@mui/material";
 
 type Input = {
   coreType: "skill" | "reinforce";
@@ -30,75 +36,69 @@ type ResultState = {
 const CoreExpCalculator: NextPageWithLayout = () => {
   const [resultState, setResultState] = useState<ResultState>();
 
-  const { handleSubmit, setValue } = useForm<Input>({
+  const { handleSubmit, getValues, setValue } = useForm<Input>({
     defaultValues: { beforeCoreExpPercent: 0 },
   });
-  const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data);
 
+  const onSubmit: SubmitHandler<Input> = (data) => {
     const result = output(data);
     setResultState(result);
   };
 
   return (
-    <div>
-      <form>
-        <Radio.Group>
-          <Radio.Button
+    <>
+      <Card
+        style={{
+          margin: "20px",
+          padding: "30px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <ToggleButtonGroup value={getValues("coreType")}>
+          <ToggleButton
             value="skill"
-            onChange={(e) => setValue("coreType", "skill")}
+            onChange={() => setValue("coreType", "skill")}
           >
             스킬코어
-          </Radio.Button>
-          <Radio.Button
+          </ToggleButton>
+          <ToggleButton
             value="reinforce"
-            onChange={(e) => setValue("coreType", "reinforce")}
+            onChange={() => setValue("coreType", "reinforce")}
           >
             강화코어
-          </Radio.Button>
-        </Radio.Group>
+          </ToggleButton>
+        </ToggleButtonGroup>
 
-        <p>
-          {" "}
-          강화하고 싶은 코어 레벨{" "}
-          <Input
-            type="number"
-            min="1"
-            max="25"
-            onChange={(e) =>
-              setValue("beforeCoreLevel", Number(e.target.value))
-            }
-          />
-        </p>
-        <p>
-          {" "}
-          강화하고 싶은 코어 경험치 %{" "}
-          <Input
-            type="number"
-            defaultValue={0}
-            min="0"
-            max="99"
-            onChange={(e) =>
-              setValue("beforeCoreExpPercent", Number(e.target.value))
-            }
-          />
-        </p>
-        <p>
-          {" "}
-          목표 레벨{" "}
-          <Input
-            type="number"
-            min="0"
-            max="25"
-            onChange={(e) => setValue("goalLevel", Number(e.target.value))}
-          />
-        </p>
-        <Button onClick={handleSubmit(onSubmit)}>계산</Button>
-      </form>
-      <br />
-      <br />
+        <br />
+        <TextField
+          type="number"
+          label="강화하고 싶은 코어 레벨"
+          size="medium"
+          onChange={(e) => setValue("beforeCoreLevel", Number(e.target.value))}
+        />
+        <br />
+        <TextField
+          type="number"
+          label="강화하고 싶은 코어 경험치 %"
+          defaultValue={0}
+          onChange={(e) =>
+            setValue("beforeCoreExpPercent", Number(e.target.value))
+          }
+        />
+        <br />
+        <TextField
+          type="number"
+          label="목표 레벨"
+          onChange={(e) => setValue("goalLevel", Number(e.target.value))}
+        />
+        <br />
+        <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+          계산
+        </Button>
+      </Card>
       {resultState && (
-        <div>
+        <Card style={{ margin: "20px", padding: "30px" }}>
           <p>필요한 경험치: {resultState.neededExp} </p>
           <p>필요한 1렙 코어의 갯수: {resultState.needed1LvCoreAmount}개</p>
           <p>
@@ -113,10 +113,9 @@ const CoreExpCalculator: NextPageWithLayout = () => {
           <p>
             필요한 경코젬의 갯수: {resultState.neededExpCoreAmount.toFixed(2)}개
           </p>
-          <br />
-        </div>
+        </Card>
       )}
-    </div>
+    </>
   );
 };
 

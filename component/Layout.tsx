@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
-import { Button } from "antd";
 import { useRouter } from "next/router";
+import { Button } from "@mui/material";
 
 export function Layout({ children }: { children: ReactNode }) {
   const router = useRouter();
   return (
     <>
-      <Button onClick={() => router.back()}>뒤로</Button>
+      <Button variant="outlined" onClick={() => router.back()}>
+        뒤로
+      </Button>
       <br />
       {children}
     </>

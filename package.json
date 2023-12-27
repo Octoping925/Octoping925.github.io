@@ -5,10 +5,11 @@
   "homepage": "https://octoping925.github.io/",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npx http-server out"
+    "serve": "npx http-server out",
+    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -27,6 +28,7 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "gh-pages": "^6.1.1",
     "typescript": "^5"
   }
 }

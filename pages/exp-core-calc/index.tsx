@@ -13,6 +13,9 @@ import {
   ToggleButtonGroup,
   Button,
   Card,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 
 type Input = {
@@ -48,20 +51,20 @@ const ExpCoreExpCalculator: NextPageWithLayout = () => {
           flexDirection: "column",
         }}
       >
-        <ToggleButtonGroup value={getValues("coreType")}>
-          <ToggleButton
+        <RadioGroup>
+          <FormControlLabel
             value="skill"
+            control={<Radio />}
+            label="스킬코어"
             onChange={() => setValue("coreType", "skill")}
-          >
-            스킬코어
-          </ToggleButton>
-          <ToggleButton
+          />
+          <FormControlLabel
             value="reinforce"
+            control={<Radio />}
+            label="강화코어"
             onChange={() => setValue("coreType", "reinforce")}
-          >
-            강화코어
-          </ToggleButton>
-        </ToggleButtonGroup>
+          />
+        </RadioGroup>
         <br />
         <TextField
           type="number"
@@ -109,6 +112,7 @@ function output({
   const expAmountArr =
     coreType === "skill" ? SKILL_CORE_EXP_ARR : REINFORCE_CORE_EXP_ARR;
 
+  debugger;
   const currentLevelAmountExp =
     expAmountArr[beforeCoreLevel + 1] - expAmountArr[beforeCoreLevel];
 
@@ -124,9 +128,11 @@ function output({
   );
 
   const afterCoreExpPercent =
-    ((exp - expAmountArr[afterCoreLevel]) /
-      (expAmountArr[afterCoreLevel + 1] - expAmountArr[afterCoreLevel])) *
-    100;
+    afterCoreLevel < 25
+      ? ((exp - expAmountArr[afterCoreLevel]) /
+          (expAmountArr[afterCoreLevel + 1] - expAmountArr[afterCoreLevel])) *
+        100
+      : 0;
 
   return { afterCoreExpPercent, afterCoreLevel };
 }

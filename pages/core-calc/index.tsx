@@ -16,6 +16,9 @@ import {
   ToggleButtonGroup,
   Button,
   Card,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
 
 type Input = {
@@ -55,20 +58,20 @@ const CoreExpCalculator: NextPageWithLayout = () => {
           flexDirection: "column",
         }}
       >
-        <ToggleButtonGroup value={getValues("coreType")}>
-          <ToggleButton
+        <RadioGroup>
+          <FormControlLabel
             value="skill"
+            control={<Radio />}
+            label="스킬코어"
             onChange={() => setValue("coreType", "skill")}
-          >
-            스킬코어
-          </ToggleButton>
-          <ToggleButton
+          />
+          <FormControlLabel
             value="reinforce"
+            control={<Radio />}
+            label="강화코어"
             onChange={() => setValue("coreType", "reinforce")}
-          >
-            강화코어
-          </ToggleButton>
-        </ToggleButtonGroup>
+          />
+        </RadioGroup>
 
         <br />
         <TextField

@@ -5,12 +5,15 @@ import { Layout } from "../component/Layout";
 
 const Home: NextPageWithLayout = () => {
   return (
-    <main>
-      <br />
-      <Link href="/core-calc">코어 목표치까지 얼마 먹을까 계산기</Link>
-      <br />
-      <br />
-      <Link href="/exp-core-calc">경코젬 먹이면 몇 렙될까 계산기</Link>
+    <main
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h1>반갑습니다! 영엑 블로그입니다</h1>
+      <div>와 주셔서 감사합니다..</div>
     </main>
   );
 };

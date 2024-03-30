@@ -9,11 +9,12 @@
     "start": "next start",
     "lint": "next lint",
     "serve": "npx http-server out",
-    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
+    "deploy": "gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.2",
     "next": "14.0.4",
     "prettier": "^3.1.1",

@@ -5,6 +5,7 @@ import {
   EXP_CORE_EXP,
   REINFORCE_CORE_EXP_ARR,
   REINFORCE_CORE_PIECE,
+  REINFORCE_CORE_PIECE_COST,
   SKILL_CORE_EXP_ARR,
   SKILL_CORE_PIECE_COST,
 } from "../../constant/core-exp";
@@ -12,8 +13,6 @@ import { Layout } from "../../component/Layout";
 import { NextPageWithLayout } from "../_app";
 import {
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Button,
   Card,
   FormControlLabel,
@@ -39,7 +38,7 @@ type ResultState = {
 const CoreExpCalculator: NextPageWithLayout = () => {
   const [resultState, setResultState] = useState<ResultState>();
 
-  const { handleSubmit, getValues, setValue } = useForm<Input>({
+  const { handleSubmit, setValue } = useForm<Input>({
     defaultValues: { beforeCoreExpPercent: 0 },
   });
 
@@ -58,6 +57,15 @@ const CoreExpCalculator: NextPageWithLayout = () => {
           flexDirection: "column",
         }}
       >
+        <h1
+          style={{
+            fontSize: "30px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          코어 목표치까지 얼마 먹을까 계산기
+        </h1>
         <RadioGroup>
           <FormControlLabel
             value="skill"
@@ -156,7 +164,7 @@ function output({
       needed1LvCoreAmount: exp / CORE_EXP,
       averageNeededCoreAmount: (exp * 2) / 45,
       maxNeededCoreAmount:
-        (exp * SKILL_CORE_PIECE_COST) / REINFORCE_CORE_PIECE / CORE_EXP,
+        (exp * REINFORCE_CORE_PIECE_COST) / REINFORCE_CORE_PIECE / CORE_EXP,
       neededExpCoreAmount: exp / EXP_CORE_EXP,
     };
   }

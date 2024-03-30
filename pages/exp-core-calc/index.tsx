@@ -9,8 +9,6 @@ import { NextPageWithLayout } from "../_app";
 import { Layout } from "../../component/Layout";
 import {
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Button,
   Card,
   RadioGroup,
@@ -51,6 +49,15 @@ const ExpCoreExpCalculator: NextPageWithLayout = () => {
           flexDirection: "column",
         }}
       >
+        <h1
+          style={{
+            fontSize: "30px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          경코젬 먹이면 몇 렙될까 계산기
+        </h1>
         <RadioGroup>
           <FormControlLabel
             value="skill"
@@ -112,7 +119,6 @@ function output({
   const expAmountArr =
     coreType === "skill" ? SKILL_CORE_EXP_ARR : REINFORCE_CORE_EXP_ARR;
 
-  debugger;
   const currentLevelAmountExp =
     expAmountArr[beforeCoreLevel + 1] - expAmountArr[beforeCoreLevel];
 

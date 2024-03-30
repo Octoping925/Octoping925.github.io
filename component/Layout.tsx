@@ -1,16 +1,15 @@
 import { ReactNode } from "react";
-import { useRouter } from "next/router";
-import { Button } from "@mui/material";
+import { ButtonAppBar } from "./AppBar";
 
-export function Layout({ children }: { children: ReactNode }) {
-  const router = useRouter();
+type LayoutProps = {
+  children: ReactNode;
+};
+
+export function Layout({ children }: LayoutProps) {
   return (
     <>
-      <Button variant="outlined" onClick={() => router.back()}>
-        뒤로
-      </Button>
-      <br />
-      {children}
+      <ButtonAppBar />
+      <div style={{ margin: "10px" }}>{children}</div>
     </>
   );
 }

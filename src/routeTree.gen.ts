@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as HotsTeamRouteImport } from './routes/hots-team'
 import { Route as ExpCoreCalcRouteImport } from './routes/exp-core-calc'
 import { Route as CoreCalcRouteImport } from './routes/core-calc'
+import { Route as IndexRouteImport } from './routes/index'
 
 const HotsTeamRoute = HotsTeamRouteImport.update({
   id: '/hots-team',
@@ -28,32 +29,41 @@ const CoreCalcRoute = CoreCalcRouteImport.update({
   path: '/core-calc',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/core-calc': typeof CoreCalcRoute
   '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/core-calc': typeof CoreCalcRoute
   '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/core-calc': typeof CoreCalcRoute
   '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/core-calc' | '/exp-core-calc' | '/hots-team'
+  fullPaths: '/' | '/core-calc' | '/exp-core-calc' | '/hots-team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/core-calc' | '/exp-core-calc' | '/hots-team'
-  id: '__root__' | '/core-calc' | '/exp-core-calc' | '/hots-team'
+  to: '/' | '/core-calc' | '/exp-core-calc' | '/hots-team'
+  id: '__root__' | '/' | '/core-calc' | '/exp-core-calc' | '/hots-team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   CoreCalcRoute: typeof CoreCalcRoute
   ExpCoreCalcRoute: typeof ExpCoreCalcRoute
   HotsTeamRoute: typeof HotsTeamRoute
@@ -82,10 +92,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoreCalcRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   CoreCalcRoute: CoreCalcRoute,
   ExpCoreCalcRoute: ExpCoreCalcRoute,
   HotsTeamRoute: HotsTeamRoute,

@@ -30,6 +30,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Pretendard";
 }
 
 h1 {
@@ -67,4 +68,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./Pretendard-Regular.woff") format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }

@@ -10,32 +10,52 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as HotsTeamRouteImport } from './routes/hots-team'
+import { Route as ExpCoreCalcRouteImport } from './routes/exp-core-calc'
+import { Route as CoreCalcRouteImport } from './routes/core-calc'
 
 const HotsTeamRoute = HotsTeamRouteImport.update({
   id: '/hots-team',
   path: '/hots-team',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpCoreCalcRoute = ExpCoreCalcRouteImport.update({
+  id: '/exp-core-calc',
+  path: '/exp-core-calc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreCalcRoute = CoreCalcRouteImport.update({
+  id: '/core-calc',
+  path: '/core-calc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/core-calc': typeof CoreCalcRoute
+  '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRoutesByTo {
+  '/core-calc': typeof CoreCalcRoute
+  '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/core-calc': typeof CoreCalcRoute
+  '/exp-core-calc': typeof ExpCoreCalcRoute
   '/hots-team': typeof HotsTeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/hots-team'
+  fullPaths: '/core-calc' | '/exp-core-calc' | '/hots-team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/hots-team'
-  id: '__root__' | '/hots-team'
+  to: '/core-calc' | '/exp-core-calc' | '/hots-team'
+  id: '__root__' | '/core-calc' | '/exp-core-calc' | '/hots-team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  CoreCalcRoute: typeof CoreCalcRoute
+  ExpCoreCalcRoute: typeof ExpCoreCalcRoute
   HotsTeamRoute: typeof HotsTeamRoute
 }
 
@@ -48,10 +68,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HotsTeamRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exp-core-calc': {
+      id: '/exp-core-calc'
+      path: '/exp-core-calc'
+      fullPath: '/exp-core-calc'
+      preLoaderRoute: typeof ExpCoreCalcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core-calc': {
+      id: '/core-calc'
+      path: '/core-calc'
+      fullPath: '/core-calc'
+      preLoaderRoute: typeof CoreCalcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  CoreCalcRoute: CoreCalcRoute,
+  ExpCoreCalcRoute: ExpCoreCalcRoute,
   HotsTeamRoute: HotsTeamRoute,
 }
 export const routeTree = rootRouteImport

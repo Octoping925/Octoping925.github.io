@@ -155,7 +155,7 @@ const HotsTeamMaker = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+    <div className="w-full min-h-screen bg-gray-900 text-gray-100 p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
           내전 팀 메이커
@@ -166,7 +166,7 @@ const HotsTeamMaker = () => {
             type="text"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder="플레이어 이름 입력"
             className="bg-gray-800 border-2 border-gray-700 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition-colors w-64 text-gray-100 placeholder-gray-500"
           />

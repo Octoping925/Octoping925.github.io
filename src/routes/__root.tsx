@@ -19,7 +19,9 @@ export const Route = createRootRoute({
         ))}
       </div>
       <hr />
-      <Outlet />
+      <div className="w-full h-full flex justify-center">
+        <Outlet />
+      </div>
       <TanStackRouterDevtools />
     </>
   ),

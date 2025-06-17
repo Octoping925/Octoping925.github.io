@@ -89,7 +89,6 @@ const HotsTeamMaker = () => {
 
   const handleDrop = (playerId: string, targetTeam: "pool" | "A" | "B") => {
     let player: Player | undefined;
-    let sourceTeam: Player[] | undefined;
     let setSourceTeam:
       | React.Dispatch<React.SetStateAction<Player[]>>
       | undefined;
@@ -99,7 +98,6 @@ const HotsTeamMaker = () => {
       const found = team.find((p) => p.id === playerId);
       if (found) {
         player = found;
-        sourceTeam = team;
         setSourceTeam = [setPlayerPool, setTeamA, setTeamB][index];
       }
     });

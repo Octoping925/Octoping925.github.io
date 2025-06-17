@@ -21,7 +21,7 @@ type ResultState = {
 export const ExpCoreExpCalculator = () => {
   const [resultState, setResultState] = useState<ResultState>();
 
-  const { handleSubmit, getValues, setValue } = useForm<Input>({
+  const { handleSubmit, setValue } = useForm<Input>({
     defaultValues: { beforeCoreExpPercent: 0 },
   });
   const onSubmit: SubmitHandler<Input> = (data) => {

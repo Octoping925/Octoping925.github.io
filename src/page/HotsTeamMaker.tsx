@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import type { KeyboardEvent } from "react";
 import { Draggable } from "../components/Draggable";
 import { Droppable } from "../components/Droppable";
-import { X } from "lucide-react";
+import { X, Copy } from "lucide-react";
 
 interface Player {
   id: string;
@@ -38,6 +38,7 @@ const HotsTeamMaker = () => {
   const [playerPool, setPlayerPool] = useState<Player[]>([]);
   const [teamA, setTeamA] = useState<Player[]>([]);
   const [teamB, setTeamB] = useState<Player[]>([]);
+  const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
   // 초기 상태 로드
   useEffect(() => {
@@ -74,6 +75,10 @@ const HotsTeamMaker = () => {
   };
 
   const handleDefaultTeam = () => {
+    if (!confirm("동호회 기본 멤버를 불러오시겠습니까?")) {
+      return;
+    }
+
     setPlayerPool([
       { id: "1", name: "김성봉" },
       { id: "2", name: "정시욱" },
@@ -144,6 +149,34 @@ const HotsTeamMaker = () => {
     }
   };
 
+  const getTeamCompositionString = (): string => {
+    const teamAString =
+      teamA.length > 0 ? `[A팀]\n${teamA.map((p) => p.name).join(", ")}` : "";
+
+    const teamBString =
+      teamB.length > 0 ? `[B팀]\n${teamB.map((p) => p.name).join(", ")}` : "";
+
+    const poolString =
+      playerPool.length > 0
+        ? `[대기]\n${playerPool.map((p) => p.name).join(", ")}`
+        : "";
+
+    return [teamAString, teamBString, poolString]
+      .filter((str) => str.length > 0)
+      .join("\n\n");
+  };
+
+  const handleCopyTeams = async () => {
+    const teamString = getTeamCompositionString();
+    try {
+      await navigator.clipboard.writeText(teamString);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
   const PlayerCard = ({
     player,
     team,
@@ -196,6 +229,13 @@ const HotsTeamMaker = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
           >
             기본 팀 설정
+          </button>
+          <button
+            onClick={handleCopyTeams}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold flex items-center gap-2"
+          >
+            <Copy className="w-5 h-5" />
+            {copySuccess ? "복사됨!" : "팀 구성 복사"}
           </button>
         </div>
 

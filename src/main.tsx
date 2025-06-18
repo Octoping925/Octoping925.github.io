@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import {
   RouterProvider,
-  createMemoryHistory,
+  createHashHistory,
   createRouter,
 } from "@tanstack/react-router";
 
@@ -11,11 +11,9 @@ import {
 import { routeTree } from "./routeTree.gen";
 
 // Create a new router instance
-const memoryHistory = createMemoryHistory({
-  initialEntries: ["/"],
-});
+const history = createHashHistory();
 
-const router = createRouter({ routeTree, history: memoryHistory });
+const router = createRouter({ routeTree, history });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {

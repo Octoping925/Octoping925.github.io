@@ -73,6 +73,23 @@ const HotsTeamMaker = () => {
     setPlayerName("");
   };
 
+  const handleDefaultTeam = () => {
+    setPlayerPool([
+      { id: "1", name: "김성봉" },
+      { id: "2", name: "정시욱" },
+      { id: "3", name: "문영채" },
+      { id: "4", name: "정재윤" },
+      { id: "5", name: "김수진" },
+      { id: "6", name: "엄소현" },
+      { id: "7", name: "이민행" },
+      { id: "8", name: "채수관" },
+      { id: "9", name: "이훈규" },
+      { id: "10", name: "윤호영" },
+    ]);
+    setTeamA([]);
+    setTeamB([]);
+  };
+
   const handleRemovePlayer = (playerId: string, team: "pool" | "A" | "B") => {
     switch (team) {
       case "pool":
@@ -173,6 +190,12 @@ const HotsTeamMaker = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
           >
             추가
+          </button>
+          <button
+            onClick={handleDefaultTeam}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
+          >
+            기본 팀 설정
           </button>
         </div>
 

@@ -1,4 +1,4 @@
-import{j as a,r as i}from"./index-Ddsou1xW.js";const S=({children:t,id:r})=>{const o=s=>{s.dataTransfer.setData("text/plain",r)};return a.jsx("div",{draggable:!0,onDragStart:o,className:"cursor-move",children:t})},y=({children:t,onDrop:r,className:o=""})=>{const s=n=>{n.preventDefault()},l=n=>{n.preventDefault();const d=n.dataTransfer.getData("text/plain");r(d)};return a.jsx("div",{onDragOver:s,onDrop:l,className:o,children:t})};/**
+import{j as a,r as i}from"./index-B0wTgDjv.js";const S=({children:t,id:r})=>{const o=s=>{s.dataTransfer.setData("text/plain",r)};return a.jsx("div",{draggable:!0,onDragStart:o,className:"cursor-move",children:t})},y=({children:t,onDrop:r,className:o=""})=>{const s=n=>{n.preventDefault()},l=n=>{n.preventDefault();const d=n.dataTransfer.getData("text/plain");r(d)};return a.jsx("div",{onDragOver:s,onDrop:l,className:o,children:t})};/**
  * @license lucide-react v0.516.0 - ISC
  *
  * This source code is licensed under the ISC license.

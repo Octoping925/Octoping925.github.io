@@ -11,14 +11,19 @@ const Menus = [
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="w-full flex gap-2 justify-center">
-        {Menus.map((menu) => (
-          <Link to={menu.href} className="[&.active]:font-bold">
-            <div className="px-2 py-1">{menu.text}</div>
-          </Link>
-        ))}
-      </div>
-      <hr />
+      <nav className="w-full bg-gray-800 p-2">
+        <div className="flex justify-center space-x-4">
+          {Menus.map((menu) => (
+            <Link
+              key={menu.href}
+              to={menu.href}
+              className="px-4 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200 [&.active]:bg-gray-900 [&.active]:text-white"
+            >
+              {menu.text}
+            </Link>
+          ))}
+        </div>
+      </nav>
       <div className="w-full h-full flex justify-center">
         <Outlet />
       </div>

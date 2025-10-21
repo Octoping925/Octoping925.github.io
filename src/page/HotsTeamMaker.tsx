@@ -84,15 +84,28 @@ const HotsTeamMaker = () => {
       { id: "2", name: "정시욱" },
       { id: "3", name: "문영채" },
       { id: "4", name: "정재윤" },
-      { id: "5", name: "김수진" },
-      { id: "6", name: "엄소현" },
-      { id: "7", name: "이민행" },
-      { id: "8", name: "채수관" },
-      { id: "9", name: "이훈규" },
-      { id: "10", name: "윤호영" },
+      { id: "5", name: "이민행" },
+      { id: "6", name: "채수관" },
+      { id: "7", name: "이훈규" },
+      { id: "8", name: "윤호영" },
+      { id: "9", name: "배종근" },
+      { id: "10", name: "박승원" },
+      { id: "11", name: "김찬" },
     ]);
     setTeamA([]);
     setTeamB([]);
+  };
+
+  const makeRandomTeam = () => {
+    const allPlayers = [...playerPool, ...teamA, ...teamB];
+    if (allPlayers.length < 2) return;
+
+    const shuffled = [...allPlayers].sort(() => Math.random() - 0.5);
+    const mid = Math.ceil(shuffled.length / 2);
+
+    setTeamA(shuffled.slice(0, mid));
+    setTeamB(shuffled.slice(mid));
+    setPlayerPool([]);
   };
 
   const handleRemovePlayer = (playerId: string, team: "pool" | "A" | "B") => {
@@ -193,10 +206,10 @@ const HotsTeamMaker = () => {
       >
         {player.name}
         <button
-          className="rounded-2xl p-1 w-fit h-fit"
+          className="rounded-2xl p-1 w-12 h-10 bg-gray-900 flex items-center justify-center cursor-pointer"
           onClick={() => handleRemovePlayer(player.id, team)}
         >
-          <X className="w-4 h-4 text-white-400" />
+          <X className="w-4 h-5 text-white-400" />
         </button>
       </div>
     </Draggable>
@@ -220,22 +233,28 @@ const HotsTeamMaker = () => {
           />
           <button
             onClick={handleAddPlayer}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold cursor-pointer"
           >
             추가
           </button>
           <button
+            onClick={handleCopyTeams}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold flex items-center gap-2 cursor-pointer"
+          >
+            <Copy className="w-5 h-5" />
+            {copySuccess ? "복사됨!" : "팀 구성 복사"}
+          </button>
+          <button
             onClick={handleDefaultTeam}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
+            className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold cursor-pointer"
           >
             기본 팀 설정
           </button>
           <button
-            onClick={handleCopyTeams}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold flex items-center gap-2"
+            onClick={makeRandomTeam}
+            className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold cursor-pointer"
           >
-            <Copy className="w-5 h-5" />
-            {copySuccess ? "복사됨!" : "팀 구성 복사"}
+            랜덤 팀 설정
           </button>
         </div>
 

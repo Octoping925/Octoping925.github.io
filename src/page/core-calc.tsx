@@ -8,7 +8,7 @@ import {
   REINFORCE_CORE_PIECE_COST,
   SKILL_CORE_EXP_ARR,
   SKILL_CORE_PIECE_COST,
-} from "../../constant/core-exp";
+} from "../constant/core-exp";
 
 type Input = {
   coreType: "skill" | "reinforce";

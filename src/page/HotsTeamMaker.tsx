@@ -33,7 +33,7 @@ const loadFromLocalStorage = (): TeamState | null => {
   }
 };
 
-const HotsTeamMaker = () => {
+export default function HotsTeamMaker() {
   const [playerName, setPlayerName] = useState<string>("");
   const [playerPool, setPlayerPool] = useState<Player[]>([]);
   const [teamA, setTeamA] = useState<Player[]>([]);
@@ -300,6 +300,4 @@ const HotsTeamMaker = () => {
       </div>
     </div>
   );
-};
-
-export default HotsTeamMaker;
+}

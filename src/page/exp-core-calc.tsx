@@ -4,7 +4,7 @@ import {
   EXP_CORE_EXP,
   REINFORCE_CORE_EXP_ARR,
   SKILL_CORE_EXP_ARR,
-} from "../../constant/core-exp";
+} from "../constant/core-exp";
 
 type Input = {
   coreType: "skill" | "reinforce";
